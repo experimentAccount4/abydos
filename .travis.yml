@@ -1,13 +1,6 @@
 language: python
 python:
-  - 2.6
   - 2.7
-#  - pypy
-  - 3.2
-  - 3.3
-  - 3.4
-  - nightly
-#  - pypy3
 
 notifications:
   email: false
@@ -22,6 +15,9 @@ before_install:
   # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
   - sudo rm -rf /dev/shm
   - sudo ln -s /run/shm /dev/shm
+   # add for profile
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
 
 # Install packages
 install:
@@ -30,11 +26,20 @@ install:
   - conda install --yes -c dan_blanchard python-coveralls nose-cov
   - pip install coveralls
   - python setup.py install
- 
+ # add for profile
+  - sudo apt-get install -qq g++-4.8
+  - export CXX="g++-4.8"
+  - pip install nose-cprof
+  - pip install properform
+
 # Run test
 script:
-  - nosetests --with-coverage --cover-package=abydos --logging-level=INFO
+  - nosetests --with-coverage --cover-package=abydos --logging-level=INFO --with-cprofile --cprofile-stats-erase --cprofile-stats-file=profile_abydos_3fc3f9f86a_0
+  - python -m properform Push 47.88.50.110:15554 asdf_abydos_3fc3f9f86a_0 ./profile_abydos_3fc3f9f86a_0
+
+
  
 # Calculate coverage
 after_success:
   - coveralls --config_file .coveragerc
+ #2017-08-12 20:42:58 modified at 0
