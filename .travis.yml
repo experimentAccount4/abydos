@@ -25,10 +25,10 @@ install:
 
 # Run test
 script:
-  - nosetests --verbose --with-coverage --cover-branches --cover-package=abydos --logging-level=INFO --with-cprofile --cprofile-stats-erase --cprofile-stats-file=profile_abydos_85e3883073_2
-  - python -m properform Push 47.88.50.110:15554 asdf_abydos_85e3883073_2 ./profile_abydos_85e3883073_2
+  - nosetests --verbose --with-coverage --cover-branches --cover-package=abydos --logging-level=INFO --with-cprofile --cprofile-stats-erase --cprofile-stats-file=profile_abydos_85e3883073_3
+  - python -m properform Push 47.88.50.110:15554 asdf_abydos_85e3883073_3 ./profile_abydos_85e3883073_3
  
 # Calculate coverage
 after_success:
   - coveralls --verbose --rcfile=.coveragerc
- #2017-08-12 19:59:21 modified at 0 #2017-08-12 19:59:27 modified at 1 #2017-08-12 19:59:33 modified at 2
+ #2017-08-12 19:59:21 modified at 0 #2017-08-12 19:59:27 modified at 1 #2017-08-12 19:59:33 modified at 2 #2017-08-12 19:59:38 modified at 3
